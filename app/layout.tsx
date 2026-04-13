@@ -1,28 +1,29 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { GeistSans, GeistMono } from "geist/font";
+
+const inter = Inter({
+  variable: "--font-sans",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "AI Tools Directory",
-  description: "Best AI tools directory",
+  description: "Discover the best AI tools",
 };
 
 export default function RootLayout({
-  children, 
+  children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      <body className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
+    <html lang="en">
+      <body className={inter.variable}>
         <Header />
-
-        <main className="flex-grew">
-          {children}
-        </main>
-
+        <main>{children}</main>
         <Footer />
       </body>
     </html>
