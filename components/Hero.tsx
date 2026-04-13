@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 export default function Hero() {
   const [counters, setCounters] = useState({
@@ -62,7 +63,7 @@ export default function Hero() {
   }, [displayText, isDeleting, textIndex]);
 
   return (
-    <section className="relative bg-linear-to-br from-slate-900 via-purple-900 to-slate-900 dark:from-slate-950 dark:via-purple-950 dark:to-slate-950 mt-14 pt-8 pb-12 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 dark:from-slate-950 dark:via-purple-950 dark:to-slate-950 mt-14 pt-8 pb-12 overflow-hidden">
       
       {/* Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
@@ -81,7 +82,7 @@ export default function Hero() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
             </span>
-            <span className="text-xs font-medium bg-linear-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="text-xs font-medium bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
               Powered by Next.js
             </span>
           </div>
@@ -90,14 +91,14 @@ export default function Hero() {
         {/* Heading */}
         <div className="text-center mb-5">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3">
-            <span className="bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               Explore Best
             </span>
             <br />
             <div className="inline-flex items-center justify-center gap-2 flex-wrap">
               <span className="text-white text-xl sm:text-2xl">AI Tools for</span>
               <div className="relative">
-                <div className="bg-linear-to-r from-purple-600 to-pink-600 rounded-lg px-3 py-1">
+                <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg px-3 py-1">
                   <span className="text-white font-mono text-lg sm:text-xl">
                     {displayText}
                     <span className="animate-pulse inline-block w-0.5 h-5 bg-white ml-1"></span>
@@ -112,15 +113,21 @@ export default function Hero() {
           </p>
         </div>
 
-        {/* Buttons */}
+        {/* Buttons - WORKING NOW */}
         <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
-          <button className="px-5 py-2 bg-linear-to-r from-purple-500 to-pink-500 rounded-lg font-semibold text-white text-sm hover:shadow-lg transition-all duration-300 hover:scale-105">
+          <Link 
+            href="/explore"
+            className="px-5 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg font-semibold text-white text-sm hover:shadow-lg transition-all duration-300 hover:scale-105 inline-block"
+          >
             🚀 Start Exploring
-          </button>
+          </Link>
           
-          <button className="px-5 py-2 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg font-semibold text-white text-sm hover:bg-white/10 transition-all duration-300 hover:scale-105">
+          <Link 
+            href="/demo"
+            className="px-5 py-2 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg font-semibold text-white text-sm hover:bg-white/10 transition-all duration-300 hover:scale-105 inline-block"
+          >
             ▶ Watch Demo
-          </button>
+          </Link>
         </div>
 
         {/* Stats */}

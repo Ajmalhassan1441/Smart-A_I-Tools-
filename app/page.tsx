@@ -101,6 +101,9 @@ export default function Home() {
   };
 
   const handleVoiceSearch = (query: string, suggested: Tool[]) => {
+    console.log('Voice search query:', query);
+    console.log('Suggested tools:', suggested.length);
+    
     setVoiceQuery(query);
     setVoiceSearchActive(true);
     setIsVoiceMode(true);
@@ -110,10 +113,12 @@ export default function Home() {
     setSearchTerm(query);
     setFilteredTools(suggested);
     
+    // Update search input value
     if (searchInputRef.current) {
       searchInputRef.current.value = query;
     }
     
+    // Show toast message
     const message = document.createElement('div');
     message.className = 'fixed top-24 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-xl shadow-lg z-50 animate-fade-in-up';
     message.innerHTML = `🎤 "${query}" - Found ${suggested.length} relevant AI tools`;
@@ -136,15 +141,12 @@ export default function Home() {
     }
   };
 
-  const categories = ['All', ...new Set(allTools.map((t: Tool) => t.category))];
-  const toolsCount = filteredTools.length;
-  
   const freeToolsCount = allTools.filter((t: Tool) => t.tags?.includes('Free')).length;
   const paidToolsCount = allTools.filter((t: Tool) => t.tags?.includes('Paid')).length;
   const trialToolsCount = allTools.filter((t: Tool) => t.tags?.includes('Free trial')).length;
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       
       <Hero />
 
@@ -215,8 +217,12 @@ export default function Home() {
               className="w-full pl-10 pr-24 py-4 text-gray-900 dark:text-white bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 shadow-lg hover:shadow-xl"
             />
             
+            {/* Voice Search Button */}
             <div className="absolute inset-y-0 right-2 flex items-center">
-              <VoiceSearch tools={allTools} onSearchResult={handleVoiceSearch} />
+              <VoiceSearch 
+                tools={allTools} 
+                onSearchResult={handleVoiceSearch}
+              />
             </div>
             
             {searchTerm && (
@@ -233,7 +239,7 @@ export default function Home() {
           
           {voiceSearchActive && (
             <div className="text-center mt-3">
-              <span className="inline-flex items-center space-x-2 px-4 py-2 bg-linear-to-r from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 rounded-full text-sm">
+              <span className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 rounded-full text-sm">
                 <span className="text-purple-500">🎤</span>
                 <span className="text-gray-700 dark:text-gray-300">Voice Search: "{voiceQuery}"</span>
                 <button onClick={clearVoiceSearch} className="ml-2 text-gray-500 hover:text-gray-700">
@@ -257,7 +263,7 @@ export default function Home() {
         {isVoiceMode && suggestedTools.length > 0 && (
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-bold bg-linear-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+              <h2 className="text-xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                 🎤 Recommended for "{voiceQuery}"
               </h2>
               <button onClick={clearVoiceSearch} className="text-sm text-gray-500 hover:text-purple-500">
@@ -291,7 +297,7 @@ export default function Home() {
         {/* Results Count */}
         <div className="mb-6">
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Found {toolsCount} tools
+            Found {filteredTools.length} tools
             {selectedPrice !== 'All' && ` • ${selectedPrice} only`}
             {selectedCategory !== 'All' && ` • ${selectedCategory} category`}
           </p>
@@ -335,7 +341,7 @@ export default function Home() {
                   searchInputRef.current.value = '';
                 }
               }}
-              className="px-6 py-3 bg-linear-to-r from-purple-500 to-pink-600 text-white rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105"
+              className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105"
             >
               Clear All Filters
             </button>
@@ -347,7 +353,7 @@ export default function Home() {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-3 bg-linear-to-r from-purple-500 to-pink-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-50 animate-bounce-slow"
+          className="fixed bottom-8 right-8 p-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-50"
           aria-label="Scroll to top"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
